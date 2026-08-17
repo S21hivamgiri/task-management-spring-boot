@@ -22,6 +22,7 @@ type Dev {
 }
 
 enum TaskStatus {
+    UNASSIGNED
     TODO
     IN_PROGRESS
     DONE
@@ -30,4 +31,5 @@ enum TaskStatus {
 type Query {
     project(id: ID!): Project
     projects: [Project!]!
+    tasksByStatus(status: TaskStatus!): [Task!]!
 }

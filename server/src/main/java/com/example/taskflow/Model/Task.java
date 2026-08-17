@@ -38,7 +38,7 @@ public class Task {
     private Dev dev;
 
     public enum TaskStatus {
-        TODO, IN_PROGRESS, DONE
+        UNASSIGNED, TODO, IN_PROGRESS, DONE
     }
 
     // static: converters are instantiated by Hibernate via a no-arg
@@ -54,9 +54,10 @@ public class Task {
                 return null;
             }
             return switch (status) {
-                case TODO -> 0;
-                case IN_PROGRESS -> 1;
-                case DONE -> 2;
+                case UNASSIGNED -> 0;
+                case TODO -> 1;
+                case IN_PROGRESS -> 2;
+                case DONE -> 3;
             };
         }
 
@@ -67,9 +68,10 @@ public class Task {
                 return null;
             }
             return switch (code) {
-                case 0 -> TaskStatus.TODO;
-                case 1 -> TaskStatus.IN_PROGRESS;
-                case 2 -> TaskStatus.DONE;
+                case 0 -> TaskStatus.UNASSIGNED;
+                case 1 -> TaskStatus.TODO;
+                case 2 -> TaskStatus.IN_PROGRESS;
+                case 3 -> TaskStatus.DONE;
                 default -> throw new IllegalArgumentException("Unknown code: " + code);
             };
         }
