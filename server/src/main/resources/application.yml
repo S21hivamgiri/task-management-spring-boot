@@ -9,3 +9,12 @@ spring:
     url: jdbc:postgresql://localhost:5432/taskflow
     username: taskflow
     password: devpassword
+    
+  graphql:
+    graphql:
+      enabled: true        # browsable GraphQL IDE at /graphiql for local dev
+    websocket:
+      path: /graphql
+    cors:
+      allowed-origins: "http://localhost:4200"   # Angular dev server
+      allowed-methods: "*"
