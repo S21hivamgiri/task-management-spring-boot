@@ -41,4 +41,6 @@ type Query {
     tasksByStatus(status: TaskStatus!): [Task!]!
     tasksByProject(id:ID!):[Task!]!
     taskById(id:ID!):Task
+    devById(id:ID!):Dev
+    devs: [Dev!]!
 }
