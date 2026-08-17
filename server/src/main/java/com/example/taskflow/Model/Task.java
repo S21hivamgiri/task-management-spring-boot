@@ -31,6 +31,12 @@ public class Task {
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
 
+    // Many tasks -> one assignee. Optional: a task can start unassigned
+    // (e.g. sitting in a backlog) and be picked up by a dev later.
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dev_id", nullable = true)
+    private Dev dev;
+
     public enum TaskStatus {
         TODO, IN_PROGRESS, DONE
     }

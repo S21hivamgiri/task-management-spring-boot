@@ -6,15 +6,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
+import java.util.List;
 
 @Entity
-@Table(name = "projects")
+@Table(name = "devs")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Project {
+public class Dev {
 
     @Id
     @GeneratedValue
@@ -22,12 +22,18 @@ public class Project {
 
     @Column(nullable = false)
     private String name;
-
-    private String description;
-
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Task> tasks = new ArrayList<>();
     
-    @OneToMany(mappedBy = "project")
-    private List<Dev> devs = new ArrayList<>();
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id", nullable = false)
+    private Project project;
+
+    @OneToMany(mappedBy = "dev")
+    private List<Task> tasks = new ArrayList<>();
+
 }
