@@ -3,6 +3,7 @@ package com.example.taskflow.Controller;
 import java.util.UUID;
 
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -38,5 +39,22 @@ public class ProjectController {
         return taskRepository.findAll().stream()
                 .filter(t -> t.getStatus() == status)
                 .toList();
+    }
+
+    @MutationMapping
+    public Project createProject(@Argument String name, @Argument String description) {
+        Project project = new Project();
+        project.setName(name);
+        project.setDescription(description);
+        return projectRepository.save(project);
+    }
+
+    @MutationMapping
+    public Boolean deleteProject(@Argument UUID id) {
+        if (!projectRepository.existsById(id)) {
+            throw new IllegalArgumentException("Project not found: " + id);
+        }
+        projectRepository.deleteById(id);
+        return true;
     }
 }

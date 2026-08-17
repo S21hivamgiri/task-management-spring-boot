@@ -28,6 +28,11 @@ enum TaskStatus {
     DONE
 }
 
+type Mutation {
+    createProject(name: String!, description: String): Project!
+    deleteProject(id: ID!): Boolean!
+}
+
 type Query {
     project(id: ID!): Project
     projects: [Project!]!
