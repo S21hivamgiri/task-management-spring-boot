@@ -40,4 +40,5 @@ type Query {
     projects: [Project!]!
     tasksByStatus(status: TaskStatus!): [Task!]!
     tasksByProject(id:ID!):[Task!]!
+    taskById(id:ID!):Task
 }

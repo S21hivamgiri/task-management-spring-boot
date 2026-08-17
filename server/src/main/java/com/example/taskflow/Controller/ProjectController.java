@@ -30,6 +30,11 @@ public class ProjectController {
     }
 
     @QueryMapping
+    public Task taskById(@Argument UUID id) {
+        return taskRepository.findById(id).orElse(null);
+    }
+
+    @QueryMapping
     public List<Project> projects() {
         return projectRepository.findAll();
     }

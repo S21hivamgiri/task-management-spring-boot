@@ -19,7 +19,7 @@ public class TaskController {
         this.taskRepository = taskRepository;
         this.projectRepository = projectRepository;
     }
-
+   
     @MutationMapping
     public Task createTask(@Argument UUID projectId, @Argument String title, @Argument String description) {
         Project project = projectRepository.findById(projectId)
