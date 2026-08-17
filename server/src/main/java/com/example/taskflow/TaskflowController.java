@@ -8,7 +8,7 @@ import java.util.Map;
 public class TaskflowController {
 
     @GetMapping("/api/health")
-    public Map sayIamAlive() {
+    public Map<String, String> sayIamAlive() {
         return Map.of(
                 "status", "ok",
                 "service", "auth-service");

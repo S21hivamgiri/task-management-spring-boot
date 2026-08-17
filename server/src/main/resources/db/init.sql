@@ -15,7 +15,7 @@ CREATE TABLE tasks (
     id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     title       VARCHAR(255) NOT NULL,
     description TEXT,
-    status      INT NOT NULL DEFAULT 0,
+    status      SMALLINT NOT NULL DEFAULT 0,
     project_id  UUID NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
     dev_id      UUID REFERENCES dev(id) ON DELETE RESTRICT SET NULL
 );
