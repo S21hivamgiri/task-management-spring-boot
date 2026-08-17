@@ -1,0 +1,37 @@
+type Project {
+    id: ID!
+    name: String!
+    description: String
+    tasks: [Task!]!
+    members: [Dev!]!
+}
+
+type Task {
+    id: ID!
+    title: String!
+    description: String
+    status: TaskStatus!
+    project: Project!
+    dev: Dev
+}
+
+type Dev {
+    id: ID!
+    name: String!
+    email: String!
+}
+
+enum TaskStatus {
+    TODO
+    IN_PROGRESS
+    DONE
+}
+
+type Query {
+}
+
+type Mutation {
+}
+
+type Subscription {
+}
