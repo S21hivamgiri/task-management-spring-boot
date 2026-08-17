@@ -21,7 +21,7 @@ public class ProjectController {
 
     public ProjectController(ProjectRepository projectRepository, TaskRepository taskRepository) {
         this.projectRepository = projectRepository;
-        this.taskRepository =taskRepository;
+        this.taskRepository = taskRepository;
     }
 
     @QueryMapping
@@ -38,6 +38,13 @@ public class ProjectController {
     public List<Task> tasksByStatus(@Argument Task.TaskStatus status) {
         return taskRepository.findAll().stream()
                 .filter(t -> t.getStatus() == status)
+                .toList();
+    }
+
+    @QueryMapping
+    public List<Task> tasksByProject(@Argument UUID id) {
+        return taskRepository.findAll().stream()
+                .filter(t -> t.getProject().getId().equals(id))
                 .toList();
     }
 
