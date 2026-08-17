@@ -28,10 +28,5 @@ enum TaskStatus {
 }
 
 type Query {
-}
-
-type Mutation {
-}
-
-type Subscription {
+    project(id: ID!): Project
 }
