@@ -31,6 +31,8 @@ enum TaskStatus {
 type Mutation {
     createProject(name: String!, description: String): Project!
     deleteProject(id: ID!): Boolean!
+    createTask(projectId: ID!, title: String!, description: String): Task!
+    updateTaskStatus(taskId: ID!, status: TaskStatus!): Task!
 }
 
 type Query {
