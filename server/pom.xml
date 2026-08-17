@@ -42,6 +42,7 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <!-- WebSocket support, needed for GraphQL subscriptions -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -49,6 +50,12 @@
         </dependency>
 
         <!-- Dev tooling -->
+        <!--Lombok used to generate the bolerplate at compile time-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
