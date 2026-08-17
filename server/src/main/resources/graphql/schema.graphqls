@@ -43,4 +43,5 @@ type Query {
     taskById(id:ID!):Task
     devById(id:ID!):Dev
     devs: [Dev!]!
+    devsfromProject(id:ID!):[Dev!]!
 }

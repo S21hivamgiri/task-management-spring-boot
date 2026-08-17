@@ -8,9 +8,10 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 import com.example.taskflow.Model.Dev;
 import com.example.taskflow.Repository.DevRepository;
+
 @Controller
 public class DevController {
-     private final DevRepository devRepository;
+    private final DevRepository devRepository;
 
     public DevController(DevRepository devRepository) {
         this.devRepository = devRepository;
@@ -24,5 +25,10 @@ public class DevController {
     @QueryMapping
     public Dev devById(@Argument UUID id) {
         return devRepository.findById(id).orElse(null);
+    }
+
+    @QueryMapping
+    public List<Dev> devsfromProject(@Argument UUID id) {
+        return devRepository.findAll().stream().filter(x -> x.getProject().getId().equals(id)).toList();
     }
 }
