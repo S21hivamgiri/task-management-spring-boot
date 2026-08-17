@@ -1,11 +1,3 @@
-CREATE TABLE devs (
-    id       UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    name     VARCHAR(64) NOT NULL,
-    email    VARCHAR(64) NOT NULL UNIQUE,
-    password TEXT NOT NULL
-    -- Every dev belongs to exactly one project. can be null initially
-    project_id    UUID REFERENCES projects(id) ON DELETE RESTRICT SET NULL
-);
 
 CREATE TABLE projects (
     id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -13,13 +5,22 @@ CREATE TABLE projects (
     description TEXT
 );
 
+CREATE TABLE devs (
+    id       UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name     VARCHAR(64) NOT NULL,
+    email    VARCHAR(64) NOT NULL UNIQUE,
+    password TEXT NOT NULL,
+    project_id    UUID REFERENCES projects(id) ON DELETE RESTRICT DEFAULT NULL
+);
+
+
 CREATE TABLE tasks (
     id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     title       VARCHAR(255) NOT NULL,
     description TEXT,
     status      SMALLINT NOT NULL DEFAULT 0,
     project_id  UUID NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
-    dev_id      UUID REFERENCES devs(id) ON DELETE RESTRICT SET NULL
+    dev_id      UUID REFERENCES devs(id) ON DELETE RESTRICT DEFAULT NULL
 );
 
 CREATE INDEX idx_tasks_project_id ON tasks(project_id);
