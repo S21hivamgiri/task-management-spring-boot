@@ -1,3 +1,11 @@
 server:
   port: 8080
-  
+
+spring:
+  application:
+    name: taskflow-backend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/taskflow
+    username: taskflow
+    password: devpassword
