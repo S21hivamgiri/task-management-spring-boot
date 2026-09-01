@@ -16,6 +16,17 @@ services:
       timeout: 5s
       retries: 5
 
+  cloudbeaver:
+    image: dbeaver/cloudbeaver:latest
+    container_name: cloudbeaver
+    ports:
+      - "8082:8978"
+    depends_on:
+      postgres:
+        condition: service_healthy # Wait for Postgres to be fully ready
+    volumes:
+      - cloudbeaver_data:/opt/cloudbeaver/workspace
+
   keycloak:
     image: quay.io/keycloak/keycloak:25.0
     container_name: taskflow-keycloak
@@ -23,7 +34,9 @@ services:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
     ports:
-      - "8081:8080"   # 8081 on host, since your Spring Boot app already uses 8080
+      - "8081:8080"   # Maps Keycloak to http://localhost:8081
     command: start-dev
+
 volumes:
   taskflow-data:
+  cloudbeaver_data:  # Added missing volume definition
