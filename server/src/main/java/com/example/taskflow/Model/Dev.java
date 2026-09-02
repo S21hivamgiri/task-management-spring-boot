@@ -25,9 +25,12 @@ public class Dev {
     
     @Column(nullable = false)
     private String email;
-
-    @Column(nullable = false)
-    private String password;
+    
+    // Links this Dev to the Keycloak user record. This is Keycloak's
+    // 'sub' claim — used to resolve "who is making this request" from
+    // an incoming JWT, since the app itself never handles passwords.
+    @Column(nullable = false, unique = true)
+    private String keycloakId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id", nullable = false)
