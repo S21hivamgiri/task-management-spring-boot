@@ -33,6 +33,8 @@ type Mutation {
     deleteProject(id: ID!): Boolean!
     createTask(projectId: ID!, title: String!, description: String): Task!
     updateTaskStatus(taskId: ID!, status: TaskStatus!): Task!
+    createDev(name: String!, email: String!, projectId: ID!): Dev!
+    claimTask(taskId: ID!): Task!
 }
 
 type Query {
