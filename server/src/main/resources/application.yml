@@ -2,6 +2,14 @@ server:
   port: 8080
 
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8081/realms/taskflow
   application:
     name: taskflow-backend
 
@@ -11,10 +19,23 @@ spring:
     password: devpassword
     
   graphql:
-    graphql:
+    graphiql:
       enabled: true        # browsable GraphQL IDE at /graphiql for local dev
     websocket:
       path: /graphql
     cors:
       allowed-origins: "http://localhost:4200"   # Angular dev server
       allowed-methods: "*"
+
+# This is a separate top-level key, NOT nested under 'spring:'
+keycloak:
+  admin:
+    server-url: http://localhost:8081
+    realm: taskflow
+    client-id: taskflow-admin-client
+    client-secret: 4lsbDVVImrg9O8UzUgYphQo9uoNbKuww
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
