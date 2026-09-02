@@ -29,7 +29,9 @@ services:
 
   keycloak:
     image: quay.io/keycloak/keycloak:25.0
-    container_name: taskflow-keycloak
+    container_name: taskflow-
+    volumes:
+      - keycloak-data:/opt/keycloak/data
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
@@ -40,3 +42,4 @@ services:
 volumes:
   taskflow-data:
   cloudbeaver_data:  # Added missing volume definition
+  keycloak-data:
