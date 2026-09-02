@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS tasks, projects, devs;
 
 CREATE TABLE projects (
     id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -9,7 +10,7 @@ CREATE TABLE devs (
     id       UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name     VARCHAR(64) NOT NULL,
     email    VARCHAR(64) NOT NULL UNIQUE,
-    password TEXT NOT NULL,
+    keycloak_id   VARCHAR(255) NOT NULL UNIQUE,
     project_id    UUID REFERENCES projects(id) ON DELETE RESTRICT DEFAULT NULL
 );
 

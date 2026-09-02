@@ -12,16 +12,24 @@ INSERT INTO projects (id, name, description) VALUES
 ('22222222-2222-2222-2222-222222222222', 'Mobile App', 'Native iOS/Android app for customers');
 
 -- ============ Devs ============
--- password_hash values below are placeholders (NOT real bcrypt hashes).
--- Replace with real bcrypt output if you need to actually log in as these
--- users, e.g. via an online bcrypt generator or your app's registration flow.
+-- keycloak_id values below are FAKE placeholders, not real Keycloak user
+-- IDs — these devs exist in Postgres for browsing/demo purposes (e.g.
+-- "show project.devs" queries) but cannot actually log in, since no
+-- matching Keycloak account exists for them.
+--
+-- If you want to test authenticated mutations (createDev, claimTask) as
+-- one of these specific devs, replace ONE row's keycloak_id with the real
+-- 'sub' claim from an actual Keycloak-issued JWT for a user you control —
+-- e.g. swap Alice's keycloak_id for shivamgiri@gmail.com's real sub:
+-- 'a081f225-632c-4926-b6ab-b9b267dbd9b8'
+--
 -- 3 devs on Website Redesign, 2 devs on Mobile App
-INSERT INTO devs (id, name, email, password, project_id) VALUES
-('aaaaaaaa-0001-0001-0001-000000000001', 'Alice Chen',    'alice@taskflow.dev',   '$2a$10$placeholderHashAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '11111111-1111-1111-1111-111111111111'),
-('aaaaaaaa-0002-0002-0002-000000000002', 'Ben Osei',      'ben@taskflow.dev',     '$2a$10$placeholderHashBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB', '11111111-1111-1111-1111-111111111111'),
-('aaaaaaaa-0003-0003-0003-000000000003', 'Carla Ruiz',    'carla@taskflow.dev',   '$2a$10$placeholderHashCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC', '11111111-1111-1111-1111-111111111111'),
-('aaaaaaaa-0004-0004-0004-000000000004', 'Dev Patel',     'dev@taskflow.dev',     '$2a$10$placeholderHashDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', '22222222-2222-2222-2222-222222222222'),
-('aaaaaaaa-0005-0005-0005-000000000005', 'Elena Popescu', 'elena@taskflow.dev',   '$2a$10$placeholderHashEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE', '22222222-2222-2222-2222-222222222222');
+INSERT INTO devs (id, name, email, keycloak_id, project_id) VALUES
+('aaaaaaaa-0001-0001-0001-000000000001', 'Alice Chen',    'alice@taskflow.dev',   'fake-keycloak-id-alice-0001',   '11111111-1111-1111-1111-111111111111'),
+('aaaaaaaa-0002-0002-0002-000000000002', 'Ben Osei',      'ben@taskflow.dev',     'fake-keycloak-id-ben-0002',     '11111111-1111-1111-1111-111111111111'),
+('aaaaaaaa-0003-0003-0003-000000000003', 'Carla Ruiz',    'carla@taskflow.dev',   'fake-keycloak-id-carla-0003',   '11111111-1111-1111-1111-111111111111'),
+('aaaaaaaa-0004-0004-0004-000000000004', 'Dev Patel',     'dev@taskflow.dev',     'fake-keycloak-id-devp-0004',    '22222222-2222-2222-2222-222222222222'),
+('aaaaaaaa-0005-0005-0005-000000000005', 'Elena Popescu', 'elena@taskflow.dev',   'fake-keycloak-id-elena-0005',   '22222222-2222-2222-2222-222222222222');
 
 -- ============ Tasks ============
 -- status: 0 = TODO, 1 = IN_PROGRESS, 2 = DONE  (matches Task.TaskStatusConverter)
